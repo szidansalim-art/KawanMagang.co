@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KawanMagang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F7FF;--surf:#fff;--ink:#0B1B4B;--mut:#5A6A96;--pri:#1D4ED8;--onpri:#fff;--pri2:#E6EEFF;--line:#D9E4FA;--ok:#0A7F58;--okbg:#E0F6EC;--no:#C42040;--nobg:#FDE8EC;--lm-bg:var(--pri);--lm-a:#BFD4FF;--lm-b:#fff;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 "Plus Jakarta Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Plus Jakarta Sans",sans-serif;margin:0;line-height:1.1}
+button{font:inherit;cursor:pointer;border:0;color:inherit;background:none}
+button:focus-visible,input:focus-visible{outline:3px solid #93B4FF;outline-offset:2px}
+body:not(.in) header,body:not(.in) main,body:not(.in) nav{display:none}
+body.in #auth{display:none}
+header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;max-width:760px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:10px;font:800 21px "Bricolage Grotesque",sans-serif}
+.me{width:38px;height:38px;border-radius:50%;background:var(--pri2);color:var(--pri);font-weight:700;display:grid;place-items:center}
+main{max-width:760px;margin:0 auto;padding:0 20px 120px}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--surf);border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:14px;color:var(--mut);font-size:12px;font-weight:500;position:relative}
+nav button[aria-current="page"]{color:var(--pri);background:var(--pri2);font-weight:700}
+nav svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bd{font-style:normal;background:var(--no);color:#fff;border-radius:99px;font-size:11px;font-weight:700;padding:0 6px;position:absolute;top:2px;left:calc(50% + 6px)}
+h1{font-size:clamp(28px,6vw,42px);font-weight:800;letter-spacing:-.02em;margin:8px 0 10px}
+.sub{color:var(--mut);margin:0 0 20px;max-width:52ch}
+.lbl{font-weight:700;margin:0 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{padding:7px 13px;border-radius:99px;border:1.5px solid var(--line);background:var(--surf);font-size:13px;font-weight:500}
+button.chip[aria-pressed="true"]{background:var(--pri);border-color:var(--pri);color:var(--onpri);font-weight:700}
+.chip.own{background:var(--pri2);border-color:var(--pri2);color:var(--pri);font-weight:700}
+.chip.s{padding:3px 10px;font-size:12px}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:22px;padding:16px;margin-bottom:14px;display:flex;gap:14px}
+.card.new{border-color:var(--pri);box-shadow:0 0 0 3px var(--pri2)}
+.ring{--p:0;--c:var(--pri);flex:none;width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--c) calc(var(--p)*1%),var(--pri2) 0);display:grid;place-items:center}
+.ring b{width:50px;height:50px;border-radius:50%;background:var(--surf);display:grid;place-items:center;font:800 17px "Bricolage Grotesque",sans-serif}
+.ring small{font-size:10px;font-weight:700}
+.body{flex:1;min-width:0}
+.body h3{font-size:19px;font-weight:600;margin-bottom:2px}
+.meta{color:var(--mut);font-size:13px;margin:0 0 10px}
+.row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;color:var(--mut);flex-wrap:wrap}
+.btns{display:flex;gap:8px}
+.btn{background:var(--pri);color:var(--onpri);border-radius:12px;padding:9px 18px;font-weight:700;white-space:nowrap}
+.btn.ghost{background:var(--pri2);color:var(--pri)}
+.btn.no{background:var(--nobg);color:var(--no)}
+.btn.full{width:100%;padding:13px}
+.st{padding:3px 11px;border-radius:99px;font-size:12px;font-weight:700}
+.st.menunggu{background:var(--pri2);color:var(--pri)}.st.diterima{background:var(--okbg);color:var(--ok)}.st.ditolak{background:var(--nobg);color:var(--no)}
+.col{flex-direction:column;gap:12px}
+.bar{height:10px;border-radius:9px;background:var(--pri2);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--pri);transition:width .4s}
+label.t{display:flex;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line);cursor:pointer}
+label.t input{width:20px;height:20px;accent-color:var(--pri)}
+label.t input:checked+span{text-decoration:line-through;color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.stat{background:var(--surf);border:1px solid var(--line);border-radius:18px;padding:12px}
+.stat b{font:800 26px "Bricolage Grotesque",sans-serif;display:block}
+.stat span{font-size:12px;color:var(--mut)}
+.empty{text-align:center;padding:36px 16px;background:var(--surf);border:1px dashed var(--line);border-radius:22px}
+.empty p{color:var(--mut);margin:8px 0 16px}
+.dot{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:18px}
+.dot.diterima{background:var(--okbg);color:var(--ok)}.dot.ditolak{background:var(--nobg);color:var(--no)}.dot.info{background:var(--pri2);color:var(--pri)}
+#toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);width:max-content;max-width:min(92vw,440px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:16px;font-weight:700;opacity:0;pointer-events:none;transition:.25s;z-index:20}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+body:not(.in) #toast{bottom:28px}
+textarea.in{resize:vertical;min-height:96px}
+.opt{position:relative}
+details.xp{margin:-4px 0 12px;font-size:13px}
+details.xp summary{cursor:pointer;font-weight:700;color:var(--pri)}
+details.xp ul{margin:6px 0 0;padding-left:18px;color:var(--mut)}
+#out{padding:7px 14px;font-size:13px}
+/* auth */
+.auth{min-height:100vh;display:grid;grid-template-columns:1fr}
+.brand{background:var(--pri);color:#fff;padding:28px 24px 36px;position:relative;overflow:hidden;--lm-bg:#fff;--lm-a:#93B4FF;--lm-b:#1D4ED8}
+.brand h1{font-size:clamp(28px,5vw,46px);margin:28px 0 12px;max-width:14ch}
+.brand p{margin:0;max-width:38ch;color:#DCE7FF}
+.brand::after{content:"";position:absolute;right:-60px;bottom:-80px;width:220px;height:220px;border-radius:50%;border:26px solid rgba(255,255,255,.14)}
+.formwrap{padding:24px 20px 40px;width:100%;max-width:460px;margin:0 auto}
+.tabs{display:flex;background:var(--pri2);border-radius:14px;padding:4px;margin-bottom:20px}
+.tabs button{flex:1;padding:10px;border-radius:11px;font-weight:700;color:var(--mut)}
+.tabs button[aria-selected="true"]{background:#fff;color:var(--pri)}
+.f{display:block;margin-bottom:14px;font-weight:700;font-size:13px}
+.in{display:block;width:100%;margin-top:6px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font:400 15px "Plus Jakarta Sans",sans-serif;color:var(--ink)}
+.in:focus{border-color:var(--pri)}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.opt{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;cursor:pointer;background:#fff;font-size:13px;font-weight:700}
+.opt small{display:block;font-weight:400;color:var(--mut)}
+.opt input{position:absolute;opacity:0}
+.opt:has(input:checked){border-color:var(--pri);background:var(--pri2)}
+.opt:has(input:focus-visible){outline:3px solid #93B4FF}
+.err{color:var(--no);font-weight:700;font-size:13px;min-height:20px;margin:0 0 6px}
+.or{display:flex;align-items:center;gap:10px;color:var(--mut);font-size:12px;margin:16px 0}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.g{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:12px;border:1.5px solid var(--line);border-radius:12px;background:#fff;font-weight:700}
+.demo{display:flex;gap:8px;margin-top:10px}.demo button{flex:1}
+@media(min-width:820px){
+ .auth{grid-template-columns:1fr 1fr}.brand{padding:48px}.formwrap{padding:64px 40px;align-self:center}
+ nav{top:0;bottom:auto;right:auto;width:210px;height:100%;flex-direction:column;justify-content:flex-start;gap:6px;padding:88px 14px 14px;border-top:0;border-right:1px solid var(--line)}
+ nav button{flex:none;flex-direction:row;gap:12px;padding:12px 14px;font-size:15px}
+ .bd{position:static;margin-left:auto}
+ header,main{margin-left:max(230px,calc(50vw - 260px))}
+ header{position:fixed;top:0;left:0;margin:0;padding:20px 24px;width:210px;z-index:6}.me{display:none}#out{position:fixed;left:14px;bottom:14px;width:182px;padding:11px;z-index:7}
+ main{padding-top:28px;padding-bottom:60px}#toast{bottom:28px}
+}
+@property --p{syntax:"<number>";inherits:false;initial-value:0}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.98)}}
+@keyframes fill{from{--p:0}}
+@keyframes grow{from{width:0}}
+@keyframes float{50%{transform:translate(-14px,-18px) rotate(8deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(196,32,64,.55)}70%,100%{box-shadow:0 0 0 9px rgba(196,32,64,0)}}
+@keyframes wiggle{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(-14deg)}20%,40%{transform:rotate(14deg)}50%{transform:rotate(-6deg)}}
+@keyframes glow{from{box-shadow:0 0 0 0 rgba(29,78,216,.45)}to{box-shadow:0 0 0 12px rgba(29,78,216,0)}}
+@keyframes spin{from{transform:rotate(-200deg) scale(.6);opacity:0}}
+#app.enter>*{animation:rise .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*60ms)}
+#app.enter .ring{animation:fill 1.1s .3s cubic-bezier(.2,.7,.2,1) both}
+#app.enter .bar i{animation:grow .9s .3s cubic-bezier(.2,.7,.2,1) both}
+.btn,.chip,.g,.tabs button,nav button{transition:transform .15s,box-shadow .2s,background .2s,color .2s}
+.btn:active,.chip:active,.g:active,.tabs button:active,nav button:active{transform:scale(.95)}
+.card{transition:transform .25s,box-shadow .25s}
+@media(hover:hover){.btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(29,78,216,.28)}.card:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(11,27,75,.09)}}
+.bd{animation:pulse 1.6s infinite}
+nav button:has(.bd) svg{animation:wiggle 3s ease-in-out infinite;transform-origin:50% 10%}
+.card.new{animation:glow 1.6s ease-out 3}
+.logo svg circle:last-child{transform-box:fill-box;transform-origin:center;animation:spin 1s cubic-bezier(.2,.7,.2,1) both}
+.brand>*{position:relative;z-index:1}
+.brand::after{animation:float 9s ease-in-out infinite}
+.brand::before{content:"";position:absolute;right:36px;top:34px;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.13);animation:float 7s ease-in-out infinite reverse}
+#auth.fresh .brand h1{animation:rise .7s .1s cubic-bezier(.2,.7,.2,1) both}
+#auth.fresh .brand p{animation:rise .7s .22s cubic-bezier(.2,.7,.2,1) both}
+#auth.fresh .formwrap{animation:rise .7s .3s cubic-bezier(.2,.7,.2,1) both}
+#toast{transition:opacity .25s,transform .45s cubic-bezier(.3,1.5,.5,1)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="logo" id="hl"></div><div style="display:flex;align-items:center;gap:8px"><button class="btn ghost" id="out" data-logout>Keluar</button><div class="me" id="av"></div></div></header>
+<main id="app" aria-live="polite"></main>
+<nav id="nav" aria-label="Menu utama"></nav>
+<div id="auth"></div>
+<div id="toast" role="status"></div>
+<script>
+const SKILLS=["Desain Grafis","Canva","Media Sosial","Copywriting","Video Editing","Fotografi","HTML/CSS","JavaScript","Excel","Analisis Data","Bahasa Inggris","Administrasi"];
+const JOBS=[
+{id:1,t:"Konten Instagram toko kopi",c:"Kopi Rasa Kita",m:"Remote",d:"2 minggu · 15 jam",r:"Sertifikat + Rp300 rb",s:["Desain Grafis","Canva","Media Sosial"],k:["Riset gaya visual","Buat 6 feed post","Revisi bersama mentor"]},
+{id:2,t:"Landing page UMKM batik",c:"Batik Nusa",m:"Remote",d:"3 minggu · 30 jam",r:"Sertifikat + Rp600 rb",s:["HTML/CSS","JavaScript","Desain Grafis"],k:["Susun wireframe","Bangun halaman","Uji di HP"]},
+{id:3,t:"Rekap penjualan bulanan",c:"Toko Sinar Jaya",m:"Bandung",d:"1 minggu · 10 jam",r:"Sertifikat",s:["Excel","Analisis Data","Administrasi"],k:["Rapikan data nota","Buat tabel ringkasan","Presentasikan hasil"]},
+{id:4,t:"Video reels produk skincare",c:"Nara Skincare",m:"Remote",d:"2 minggu · 20 jam",r:"Sertifikat + Rp450 rb",s:["Video Editing","Fotografi","Media Sosial"],k:["Ambil footage","Edit 4 reels","Pilih musik dan teks"]},
+{id:5,t:"Artikel blog wisata danau",c:"Pesona Danau",m:"Remote",d:"2 minggu · 12 jam",r:"Sertifikat",s:["Copywriting","Bahasa Inggris","Media Sosial"],k:["Riset destinasi","Tulis 3 artikel","Terjemahkan ke Inggris"]},
+{id:6,t:"Dashboard survei pelanggan",c:"Warung Digital",m:"Jakarta",d:"3 minggu · 25 jam",r:"Sertifikat + Rp500 rb",s:["Analisis Data","Excel","Bahasa Inggris"],k:["Bersihkan data survei","Buat grafik","Tulis temuan utama"]}
+];
+const J=id=>JOBS.find(x=>x.id==id);
+const $=id=>document.getElementById(id);
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const K="kawanmagang-v2";
+function seed(){
+ const A=[["Ayu Lestari","ayu",["Desain Grafis","Canva"],1],["Raka Pratama","raka",["Copywriting","Media Sosial","Canva"],1],["Dinda Safira","dinda",["Desain Grafis","Canva","Media Sosial","Fotografi"],1],["Fajar Nugroho","fajar",["Excel","Administrasi"],3],["Dimas Rahman","dimas",["Desain Grafis","Canva","Media Sosial"],1]];
+ const d={n:50,users:[{n:"Admin KawanMagang",e:"admin@kawanmagang.id",p:"admin123",r:"admin",sk:[]},{n:"Dimas Rahman",e:"dimas@demo.id",p:"demo123",r:"pelamar",sk:["Desain Grafis","Canva","Media Sosial"],sc:"SMK Negeri 2 Surabaya, kelas XI",or:"Surabaya",g:"Laki-laki",xp:"Desainer poster kegiatan OSIS\nFreelance desain feed Instagram untuk 2 toko online"}],apps:[],notifs:[]};
+ const P=[{sc:"SMK Telkom Bandung, kelas XI",or:"Bandung",g:"Perempuan",xp:"Admin Instagram OSIS selama 1 tahun\nJuara 2 lomba poster sekolah"},{sc:"Universitas Padjadjaran, Ilmu Komunikasi",or:"Cirebon",g:"Laki-laki",xp:"Penulis konten majalah kampus\nMagang kreator konten 1 bulan"},{sc:"SMK Multimedia Medan, kelas XII",or:"Medan",g:"Perempuan",xp:"PKL desain di percetakan lokal\nFreelance desain logo untuk 5 UMKM"},{sc:"Universitas Gadjah Mada, Manajemen",or:"Yogyakarta",g:"Laki-laki",xp:"Bendahara himpunan mahasiswa\nBelum pernah magang"},{sc:"SMK Negeri 2 Surabaya, kelas XI",or:"Surabaya",g:"Laki-laki",xp:"Desainer poster kegiatan OSIS\nFreelance desain feed Instagram untuk 2 toko online"}];
+ A.forEach((a,i)=>{d.apps.push({id:i+1,j:a[3],e:a[1]+"@demo.id",n:a[0],s:a[2],p:P[i],st:"menunggu",d:[false,false,false]});
+  d.notifs.push({id:i+1,to:"admin",k:"info",r:false,t:Date.now()-(i+1)*3600000,x:`${a[0]} melamar “${J(a[3]).t}”`})});
+ return d}
+function load(){try{return JSON.parse(localStorage.getItem(K))}catch(e){return null}}
+function save(){try{localStorage.setItem(K,JSON.stringify(D))}catch(e){}}
+let D=load()||seed(),ME=null;
+try{ME=sessionStorage.getItem("km")}catch(e){}
+const S={tab:"cocok",auth:"masuk",f:"semua"};
+const U=()=>D.users.find(u=>u.e===ME);
+const mine=n=>n.to===ME||(n.to==="admin"&&U()&&U().r==="admin");
+const unread=()=>D.notifs.filter(n=>mine(n)&&!n.r).length;
+function push(to,x,k){D.notifs.unshift({id:D.n++,to,x,k,r:false,t:Date.now()})}
+const ago=t=>{const m=Math.floor((Date.now()-t)/60000);return m<1?"Baru saja":m<60?m+" mnt lalu":m<1440?Math.floor(m/60)+" jam lalu":Math.floor(m/1440)+" hari lalu"};
+const score=(req,own)=>Math.round(req.filter(x=>own.includes(x)).length/req.length*100);
+const ring=p=>`<div class="ring" style="--p:${p}" aria-label="Kecocokan ${p} persen"><b>${p}<small>%</small></b></div>`;
+const LOGO=`<svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="10" fill="var(--lm-bg)"/><circle cx="13" cy="17" r="7" fill="var(--lm-a)"/><circle cx="21" cy="17" r="7" fill="none" stroke="var(--lm-b)" stroke-width="2.5"/></svg>`;
+$("hl").innerHTML=LOGO+"KawanMagang";
+const ICON={cocok:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>',lamaran:'<path d="M4 6h16M4 12h10M4 18h7"/><path d="m16 16 2 2 4-4"/>',daftar:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>',proyek:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/>',notif:'<path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 20a2 2 0 0 0 4 0"/>',profil:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'};
+const LBL={cocok:"Cocok",lamaran:"Lamaran",daftar:"Pelamar",proyek:"Proyek",notif:"Notifikasi",profil:"Profil"};
+const TB={pelamar:["cocok","lamaran","notif","profil"],admin:["daftar","proyek","notif","profil"]};
+function toast(m,ms){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove("on"),ms||2200)}
+function nav(){const u=U(),c=unread();$("nav").innerHTML=TB[u.r].map(k=>`<button data-go="${k}" ${S.tab===k?'aria-current="page"':''}><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k]}</svg>${LBL[k]}${k==="notif"&&c?`<em class="bd">${c}</em>`:""}</button>`).join("");
+ $("av").textContent=u.n.split(" ").map(w=>w[0]).slice(0,2).join("").toUpperCase()}
+function auth(){const d=S.auth==="daftar";
+ return `<section class="auth"><div class="brand"><div class="logo">${LOGO}KawanMagang</div><h1>Magang singkat, hasil nyata</h1><p>Cocokkan skill kamu dengan proyek 1–3 minggu dari UMKM dan startup. Lamar, pantau, lalu dapat sertifikat.</p></div>
+ <div class="formwrap"><div class="tabs" role="tablist"><button role="tab" data-auth="masuk" aria-selected="${!d}">Masuk</button><button role="tab" data-auth="daftar" aria-selected="${d}">Daftar</button></div>
+ <form id="af" novalidate>
+ ${d?`<label class="f">Nama lengkap<input class="in" name="n" autocomplete="name"></label>`:""}
+ <label class="f">Email<input class="in" name="e" type="email" autocomplete="email"></label>
+ <label class="f">Kata sandi<input class="in" name="p" type="password" autocomplete="${d?"new-password":"current-password"}"></label>
+ ${d?`<div class="opts"><label class="opt"><input type="radio" name="r" value="pelamar" checked>Pelamar<small>Cari magang</small></label><label class="opt"><input type="radio" name="r" value="admin">Admin<small>Kelola pelamar</small></label></div>`:""}
+ <p class="err" id="err" role="alert"></p>
+ <button class="btn full" type="submit">${d?"Buat akun":"Masuk"}</button></form>
+ <div class="or">atau</div>
+ <button class="g" data-google type="button"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.1 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.4c-.5 2.9-2.2 5.3-4.6 6.9l7.4 5.7c4.3-4 6.9-9.9 6.9-17.1z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.4-5.7c-2 1.4-4.7 2.3-8.5 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>${d?"Daftar":"Masuk"} dengan Google</button>
+ <div class="or">coba cepat</div>
+ <div class="demo"><button class="btn ghost" data-demo="pelamar" type="button">Demo pelamar</button><button class="btn ghost" data-demo="admin" type="button">Demo admin</button></div></div></section>`}
+function cocok(){const u=U(),own=u.sk;
+ const list=JOBS.map(j=>({...j,p:score(j.s,own)})).sort((a,b)=>b.p-a.p);
+ return `<h1>Magang singkat yang pas dengan skill kamu</h1><p class="sub">Pilih skill yang kamu kuasai. Proyek diurutkan dari yang paling cocok.</p>
+ <p class="lbl">Skill kamu</p><div class="chips">${SKILLS.map(s=>`<button class="chip" data-skill="${esc(s)}" aria-pressed="${own.includes(s)}">${esc(s)}</button>`).join("")}</div>
+ ${list.map(j=>{const a=D.apps.find(x=>x.j==j.id&&x.e===ME);return `<article class="card">${ring(j.p)}<div class="body"><h3>${esc(j.t)}</h3><p class="meta">${esc(j.c)} · ${esc(j.m)}</p>
+ <div class="row">${j.s.map(s=>`<span class="chip s ${own.includes(s)?'own':''}">${esc(s)}</span>`).join("")}</div>
+ <div class="foot"><span>${esc(j.d)}<br>${esc(j.r)}</span>${a?`<button class="btn ghost" data-go="lamaran">Lihat lamaran</button>`:`<button class="btn" data-apply="${j.id}">Lamar</button>`}</div></div></article>`}).join("")}`}
+function lamaran(){const my=D.apps.filter(a=>a.e===ME);
+ if(!my.length)return `<h1>Lamaran</h1><div class="empty"><h3>Belum ada lamaran</h3><p>Lamar proyek yang cocok, lalu pantau keputusannya di sini.</p><button class="btn" data-go="cocok">Cari proyek</button></div>`;
+ return `<h1>Lamaran</h1><p class="sub">Pantau status lamaranmu. Tugas muncul setelah lamaran diterima.</p>`+my.map(a=>{const j=J(a.j),n=a.d.filter(Boolean).length,p=Math.round(n/a.d.length*100);
+ return `<article class="card col"><div class="foot"><div><h3>${esc(j.t)}</h3><p class="meta" style="margin:2px 0 0">${esc(j.c)} · ${esc(j.d)}</p></div><span class="st ${a.st}">${a.st[0].toUpperCase()+a.st.slice(1)}</span></div>
+ ${a.st==="menunggu"?`<p class="meta" style="margin:0">Menunggu keputusan dari ${esc(j.c)}.</p>`:""}
+ ${a.st==="ditolak"?`<p class="meta" style="margin:0">Belum cocok kali ini. Ayo coba proyek lain!</p><button class="btn" data-go="cocok">Cari proyek lain</button>`:""}
+ ${a.st==="diterima"?`<div class="bar" role="progressbar" aria-valuenow="${p}" aria-valuemin="0" aria-valuemax="100"><i style="width:${p}%"></i></div><div class="foot"><span>${n} dari ${a.d.length} tugas selesai</span><b>${p}%</b></div>
+ <div>${j.k.map((k,i)=>`<label class="t"><input type="checkbox" data-task="${a.id}:${i}" ${a.d[i]?"checked":""}><span>${esc(k)}</span></label>`).join("")}</div>${p===100?`<button class="btn" data-cert="1">Unduh sertifikat</button>`:""}`:""}</article>`}).join("")}
+function daftar(){const c=s=>D.apps.filter(a=>a.st===s).length,L=D.apps.filter(a=>S.f==="semua"||a.st===S.f);
+ return `<h1>Pelamar masuk</h1><p class="sub">Terima atau tolak pelamar. Mereka langsung dapat notifikasi.</p>
+ <div class="stats"><div class="stat"><b>${c("menunggu")}</b><span>Menunggu</span></div><div class="stat"><b>${c("diterima")}</b><span>Diterima</span></div><div class="stat"><b>${c("ditolak")}</b><span>Ditolak</span></div></div>
+ <div class="chips">${["semua","menunggu","diterima","ditolak"].map(f=>`<button class="chip" data-filter="${f}" aria-pressed="${S.f===f}">${f[0].toUpperCase()+f.slice(1)}</button>`).join("")}</div>
+ ${L.length?L.map(a=>{const j=J(a.j);return `<article class="card">${ring(score(j.s,a.s))}<div class="body"><h3>${esc(a.n)}</h3><p class="meta">Melamar “${esc(j.t)}” · ${esc(j.c)}</p>${prof(a)}
+ <div class="row">${a.s.map(s=>`<span class="chip s ${j.s.includes(s)?'own':''}">${esc(s)}</span>`).join("")}</div>
+ <div class="foot"><span></span>${a.st==="menunggu"?`<div class="btns"><button class="btn no" data-reject="${a.id}">Tolak</button><button class="btn" data-accept="${a.id}">Terima</button></div>`:`<span class="st ${a.st}">${a.st[0].toUpperCase()+a.st.slice(1)}</span>`}</div></div></article>`}).join(""):`<div class="empty"><h3>Tidak ada pelamar</h3><p>Belum ada lamaran dengan status ini.</p></div>`}`}
+function proyek(){return `<h1>Proyek magang</h1><p class="sub">Semua proyek yang tayang di KawanMagang.</p>`+JOBS.map(j=>{const a=D.apps.filter(x=>x.j===j.id);return `<article class="card col"><div><h3>${esc(j.t)}</h3><p class="meta" style="margin:2px 0 0">${esc(j.c)} · ${esc(j.m)} · ${esc(j.d)}</p></div>
+ <div class="row" style="margin:0">${j.s.map(s=>`<span class="chip s own">${esc(s)}</span>`).join("")}</div><span class="meta" style="margin:0">${a.length} pelamar · ${a.filter(x=>x.st==="diterima").length} diterima</span></article>`}).join("")}
+function notif(){const L=D.notifs.filter(mine);
+ return `<h1>Notifikasi</h1>`+(L.length?L.map(n=>`<article class="card ${n.r?"":"new"}" style="align-items:center"><div class="dot ${n.k}">${n.k==="diterima"?"✓":n.k==="ditolak"?"✕":"i"}</div><div class="body"><p style="margin:0;font-weight:700">${esc(n.x)}</p><p class="meta" style="margin:2px 0 0">${ago(n.t)}</p></div></article>`).join(""):`<div class="empty"><h3>Belum ada notifikasi</h3><p>Kabar lamaran akan muncul di sini.</p></div>`)}
+function profil(){const u=U();
+ return `<h1>Profil</h1><article class="card col"><div class="foot" style="justify-content:flex-start;gap:14px"><div class="me" style="width:56px;height:56px;font-size:20px">${esc($("av").textContent)}</div><div><h3>${esc(u.n)}</h3><p class="meta" style="margin:2px 0 0">${esc(u.e)}</p></div></div>
+ <span class="st menunggu" style="align-self:flex-start">${u.r==="admin"?"Admin pengelola":"Pelamar"}</span>
+ <button class="btn ghost" data-logout>Keluar</button><button class="btn no" data-reset>Reset data demo</button></article>`}
+function grab(){const pf=$("pf");if(!pf)return;const f=new FormData(pf),u=U();u.sc=(f.get("sc")||"").trim();u.or=(f.get("or")||"").trim();u.g=f.get("g")||u.g||"";u.xp=(f.get("xp")||"").trim()}
+function prof(a){const p=a.p||{},ok=p.sc&&p.or&&p.g&&p.xp,L=(p.xp||"").split("\n").filter(Boolean);
+ return `<p class="meta" style="margin:-6px 0 10px">${esc(p.sc||"Sekolah belum diisi")} · ${esc(p.or||"asal belum diisi")} · ${esc(p.g||"gender belum diisi")}</p><details class="xp"><summary>Pengalaman${ok?"":" (profil belum lengkap)"}</summary><ul>${L.length?L.map(x=>`<li>${esc(x)}</li>`).join(""):"<li>Belum diisi</li>"}</ul></details>`}
+function profForm(){const u=U();
+ return `<h2 style="font-size:22px;margin:22px 0 6px">Data diri</h2><p class="sub" style="margin-bottom:14px">Admin melihat data ini sebelum menerima atau menolak lamaranmu. Isi dengan jujur dan lengkap, lalu simpan.</p>
+ <form id="pf" class="card col" novalidate>
+ <label class="f">Sekolah atau kampus<input class="in" name="sc" value="${esc(u.sc||"")}" placeholder="Contoh: SMK Negeri 1, kelas XI"></label>
+ <label class="f">Asal daerah<input class="in" name="or" value="${esc(u.or||"")}" placeholder="Contoh: Kota Bandung"></label>
+ <div class="f">Jenis kelamin<div class="opts" style="margin:6px 0 0">${["Laki-laki","Perempuan"].map(g=>`<label class="opt"><input type="radio" name="g" value="${g}" ${u.g===g?"checked":""}>${g}</label>`).join("")}</div></div>
+ <div class="f">Skill<div class="chips" style="margin:8px 0 0">${SKILLS.map(s=>`<button type="button" class="chip" data-skill="${esc(s)}" aria-pressed="${u.sk.includes(s)}">${esc(s)}</button>`).join("")}</div></div>
+ <label class="f">Pengalaman<textarea class="in" name="xp" rows="4" placeholder="Satu pengalaman per baris. Tulis “Belum ada pengalaman” bila belum ada.">${esc(u.xp||"")}</textarea></label>
+ <button class="btn full" type="submit">Simpan profil</button></form>`}
+const V={cocok,lamaran,daftar,proyek,notif,profil:()=>profil()+(U().r==="pelamar"?profForm():"")};
+function render(){const u=U();document.body.classList.toggle("in",!!u);
+ if(!u){lastTab=null;const a=$("auth"),fresh=!a.dataset.seen;a.innerHTML=auth();if(fresh){a.dataset.seen=1;a.classList.add("fresh");setTimeout(()=>a.classList.remove("fresh"),1500)}return}
+ if(!TB[u.r].includes(S.tab))S.tab=TB[u.r][0];
+ $("app").innerHTML=V[S.tab]();anim();
+ if(S.tab==="notif"){D.notifs.forEach(n=>{if(mine(n))n.r=true});save()}
+ nav()}
+let lastTab=null;
+function anim(){const m=$("app");[...m.children].forEach((c,i)=>c.style.setProperty("--i",Math.min(i,9)));
+ if(lastTab===S.tab)return;lastTab=S.tab;m.classList.remove("enter");void m.offsetWidth;m.classList.add("enter");clearTimeout(anim.h);anim.h=setTimeout(()=>m.classList.remove("enter"),1600);
+ if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+ m.querySelectorAll(".stat b").forEach(b=>{const n=+b.textContent;if(!n)return;let t0;const f=t=>{t0=t0||t;const p=Math.min((t-t0)/700,1);b.textContent=Math.round(n*p);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)})}
+function keep(){const y=scrollY;render();scrollTo(0,y)}
+function login(e){ME=e;try{sessionStorage.setItem("km",e)}catch(x){}
+ S.tab=TB[U().r][0];render();scrollTo(0,0);const n=D.notifs.find(n=>mine(n)&&!n.r);if(n)toast(n.x,4200)}
+document.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset,u=U();
+ if(d.go){S.tab=d.go;render();scrollTo(0,0)}
+ else if(d.auth){S.auth=d.auth;render()}
+ else if(d.demo)login(d.demo==="admin"?"admin@kawanmagang.id":"dimas@demo.id");
+ else if(d.google!==undefined){const f=document.querySelector("#af [name=r]:checked"),em="pengguna.google@gmail.com";
+  if(!D.users.some(x=>x.e===em)){D.users.push({n:"Pengguna Google",e:em,p:null,r:f?f.value:"pelamar",sk:[]});save()}
+  login(em);toast("Masuk dengan Google (simulasi)")}
+ else if(d.logout!==undefined){ME=null;try{sessionStorage.removeItem("km")}catch(x){}render();scrollTo(0,0)}
+ else if(d.reset!==undefined){D=seed();save();toast("Data demo direset");render()}
+ else if(d.skill){grab();const i=u.sk.indexOf(d.skill);i<0?u.sk.push(d.skill):u.sk.splice(i,1);save();keep()}
+ else if(d.apply){if(!(u.sc&&u.or&&u.g&&u.xp&&u.sk.length)){S.tab="profil";render();scrollTo(0,0);return toast("Lengkapi profil dulu sebelum melamar",3200)}
+  const j=J(d.apply);D.apps.push({id:D.n++,j:j.id,e:ME,n:u.n,s:[...u.sk],p:{sc:u.sc,or:u.or,g:u.g,xp:u.xp},st:"menunggu",d:j.k.map(()=>false)});
+  push("admin",`${u.n} melamar “${j.t}”`,"info");push(ME,`Lamaran kamu untuk “${j.t}” terkirim ke ${j.c}. Keputusannya akan muncul di sini.`,"info");save();render();toast("Lamaran terkirim ke "+j.c)}
+ else if(d.accept||d.reject){const a=D.apps.find(x=>x.id==(d.accept||d.reject)),j=J(a.j),ok=!!d.accept;a.st=ok?"diterima":"ditolak";
+  push(a.e,ok?`Selamat! Lamaran kamu untuk “${j.t}” diterima oleh ${j.c}.`:`Maaf, lamaran kamu untuk “${j.t}” tidak diterima oleh ${j.c}. Ayo coba lagi dengan proyek lain!`,a.st);
+  save();keep();toast(ok?"Pelamar diterima. Notifikasi terkirim.":"Pelamar ditolak. Notifikasi terkirim.")}
+ else if(d.filter){S.f=d.filter;render()}
+ else if(d.cert)toast("Sertifikat diunduh")});
+document.addEventListener("change",e=>{const t=e.target.dataset.task;if(!t)return;const[id,i]=t.split(":"),a=D.apps.find(x=>x.id==id);a.d[i]=e.target.checked;save();keep();if(a.d.every(Boolean))toast("Semua tugas selesai")});
+document.addEventListener("submit",e=>{e.preventDefault();if(e.target.id==="pf"){grab();save();keep();return toast("Profil disimpan")}const f=new FormData(e.target),em=(f.get("e")||"").trim().toLowerCase(),pw=f.get("p")||"",er=m=>{$("err").textContent=m};
+ if(S.auth==="daftar"){const n=(f.get("n")||"").trim();
+  if(!n||!em.includes("@"))return er("Isi nama dan email yang valid.");
+  if(pw.length<6)return er("Kata sandi minimal 6 karakter.");
+  if(D.users.some(u=>u.e===em))return er("Email sudah terdaftar. Silakan masuk.");
+  D.users.push({n,e:em,p:pw,r:f.get("r")||"pelamar",sk:[]});save();login(em)}
+ else{const u=D.users.find(u=>u.e===em&&u.p===pw);if(!u)return er("Email atau kata sandi salah.");login(em)}});
+addEventListener("storage",e=>{if(e.key!==K)return;const old=D;D=load()||D;if(!ME)return;
+ const n=D.notifs.find(n=>mine(n)&&!n.r&&!old.notifs.some(o=>o.id===n.id));if(n)toast(n.x,4200);render()});
+render();
+</script>
+</body>
+</html>
